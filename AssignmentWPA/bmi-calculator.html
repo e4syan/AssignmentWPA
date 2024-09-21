@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>BMI Calculator</h1>
+        <nav>
+            <a href="index.html">Home</a>
+            <a href="health-info.html">Health Info</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>What is BMI?</h2>
+        <p>BMI (Body Mass Index) is a measure of body fat based on your weight in relation to your height.</p>
+
+        <h3>BMI Calculator</h3>
+        <form id="bmi-form">
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" required oninput="validateInput('weight')">
+
+            <label for="height">Height (cm):</label>
+            <input type="number" id="height" required oninput="validateInput('height')">
+
+            <button type="button" onclick="calculateBMI()">Calculate BMI</button>
+        </form>
+
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progress-bar"></div>
+        </div>
+
+        <p id="bmi-result"></p>
+        <img src="picture/bmi-result.jpg" alt=""  width="1500" height="400">
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Health Awareness. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function validateInput(field) {
+            const input = document.getElementById(field);
+            if (input.value > 0) {
+                input.classList.add('valid');
+                input.classList.remove('invalid');
+            } else {
+                input.classList.add('invalid');
+                input.classList.remove('valid');
+            }
+        }
+
+        function calculateBMI() {
+            const weight = parseFloat(document.getElementById("weight").value);
+            const height = parseFloat(document.getElementById("height").value) / 100; // convert cm to meters
+            const bmiResultElement = document.getElementById("bmi-result");
+            const progressBar = document.getElementById("progress-bar");
+
+            if (isNaN(weight) || isNaN(height) || weight <= 0 || height <= 0) {
+                bmiResultElement.textContent = "Please enter valid weight and height values.";
+                progressBar.style.width = '0%';
+                return;
+            }
+
+            const bmi = weight / (height * height);
+            let bmiCategory = "";
+            let progressValue = 0;
+
+            if (bmi < 18.5) {
+                bmiCategory = "Underweight";
+                progressValue = 20;
+            } else if (bmi >= 18.5 && bmi < 24.9) {
+                bmiCategory = "Normal weight";
+                progressValue = 50;
+            } else if (bmi >= 25 && bmi < 29.9) {
+                bmiCategory = "Overweight";
+                progressValue = 75;
+            } else {
+                bmiCategory = "Obesity";
+                progressValue = 100;
+            }
+
+            bmiResultElement.textContent = `Your BMI is ${bmi.toFixed(2)} (${bmiCategory}).`;
+            progressBar.style.width = progressValue + '%';
+        }
+    </script>
+</body>
+</html>

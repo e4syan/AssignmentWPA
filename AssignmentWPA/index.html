@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Awareness for Alpha Generation</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="header-image1"></div>
+        <h1>Welcome to Health Awareness</h1>
+        <p id="greeting"></p>
+        <nav>
+            <a href="health-info.html">Health Info</a>
+            <a href="bmi-calculator.html">BMI Calculator</a>
+            <a href="contact.html">Contact Us</a>
+        </nav>
+    </header>
+
+    <section>
+        <h2>Raising Health Awareness for Alpha Generation</h2>
+        <p>Healthy eating and an active lifestyle are essential for growing up strong and staying fit. Learn more about nutrition, exercise, and check your BMI using our calculator.</p>
+        <button onclick="location.href='bmi-calculator.html'">Start BMI Calculator</button>
+    </section>
+
+    <section>
+        <h3>Why Health Matters ?</h3>
+        <ul>
+            <li>Promotes Healthy Growth</li>
+            <li>Boosts Energy Levels</li>
+            <li>Improves Mental Well-being</li>
+        </ul>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 Health Awareness. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function getGreeting() {
+            const date = new Date();
+            const hour = date.getHours();
+            const greetingElement = document.getElementById("greeting");
+
+            if (hour < 12) {
+                greetingElement.textContent = "Good Morning!";
+            } else if (hour < 18) {
+                greetingElement.textContent = "Good Afternoon!";
+            } else {
+                greetingElement.textContent = "Good Evening!";
+            }
+        }
+
+        window.onload = getGreeting;
+    </script>
+</body>
+</html>
